@@ -30,7 +30,7 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
 )
 
 install(
-    EXPORT mymath
+    EXPORT mymathTargets
     DESTINATION share/mymath
     FILE mymathConfig.cmake
 )
