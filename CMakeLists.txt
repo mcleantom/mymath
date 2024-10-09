@@ -1,24 +1,31 @@
 cmake_minimum_required(VERSION 3.10)
 project(mymath VERSION 1.0.0)
 
-# Add the header and source files
-add_library(mymath STATIC mymath.cpp mymath.h)
+# Add the library
+add_library(mymath STATIC mymath.cpp)
 
-# Optionally add include directories if needed
-target_include_directories(mymath PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+# Include directories
+target_include_directories(mymath 
+    PUBLIC 
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include> # Where headers will be placed when installed
+)
 
-# Install rules
+# Specify installation rules
 install(TARGETS mymath
-        EXPORT mymathTargets
-        ARCHIVE DESTINATION lib
-        LIBRARY DESTINATION lib
-        RUNTIME DESTINATION bin)
+    EXPORT mymathTargets
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION bin
+)
 
 install(EXPORT mymathTargets
-        FILE mymathTargets.cmake
-        NAMESPACE mymath::
-        DESTINATION lib/cmake/mymath)
+    FILE mymathTargets.cmake
+    NAMESPACE mymath::
+    DESTINATION lib/cmake/mymath
+)
 
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
-        DESTINATION include
-        FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
+    DESTINATION include
+    FILES_MATCHING PATTERN "*.h"
+)
