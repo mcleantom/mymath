@@ -5,8 +5,10 @@ project(mymath VERSION 1.0.0)
 add_library(mymath STATIC mymath.cpp)
 
 # Include directories
-target_include_directories(mymath PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
-
+target_include_directories(mymath PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+    $<INSTALL_INTERFACE:include>
+)
 
 # Specify installation rules
 install(TARGETS mymath
