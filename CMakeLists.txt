@@ -16,6 +16,7 @@ install(TARGETS mymath
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin
+    INCLUDES DESTINATION include
 )
 
 install(EXPORT mymathTargets
