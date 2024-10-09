@@ -5,15 +5,11 @@ project(mymath VERSION 1.0.0)
 add_library(mymath STATIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>/mymath.cpp)
 
 # Include directories
-target_include_directories(mymath PUBLIC
+target_include_directories(
+    mymath PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
     $<INSTALL_INTERFACE:include>
 )
-
-set(MYMATH_PUBLIC_HEADERS
-    ${CMAKE_CURRENT_SOURCE_DIR}/mymath.h  # List your headers here
-)
-set_target_properties(mymath PROPERTIES PUBLIC_HEADER "${MYMATH_PUBLIC_HEADERS}")
 
 # Specify installation rules
 install(TARGETS mymath
@@ -21,7 +17,7 @@ install(TARGETS mymath
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin
-    PUBLIC_HEADER DESTINATION include/mymath
+    INCLUDES DESTINATION include
 )
 
 install(EXPORT mymathTargets
@@ -39,4 +35,13 @@ install(
     EXPORT mymathTargets
     DESTINATION share/mymath
     FILE mymathConfig.cmake
+)
+
+set(HEADERS
+    ${CMAKE_CURRENT_SOURCE_DIR}/mymath.h
+)
+
+install(
+    FILES ${HEADERS}
+    DESTINATION include
 )
