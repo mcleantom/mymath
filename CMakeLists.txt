@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(mymath VERSION 1.0.0)
 
 # Add the library
-add_library(mymath STATIC mymath.cpp)
+add_library(mymath STATIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>/mymath.cpp)
 
 # Include directories
 target_include_directories(mymath PUBLIC
@@ -21,7 +21,7 @@ install(TARGETS mymath
 install(EXPORT mymathTargets
     FILE mymathTargets.cmake
     NAMESPACE mymath::
-    DESTINATION lib/cmake/mymath
+    DESTINATION share/cmake/mymath
 )
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
