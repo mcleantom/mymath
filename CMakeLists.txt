@@ -10,8 +10,10 @@ target_include_directories(mymath PUBLIC
     $<INSTALL_INTERFACE:include>
 )
 
-get_target_property(MYMATH_PUBLIC_HEADERS mymath INTERFACE_SOURCES)
-set_target_properties(mymath PROPERTIES PUBLIC_HEADER "${MYLIB_PUBLIC_HEADERS}")
+set(MYMATH_PUBLIC_HEADERS
+    ${CMAKE_CURRENT_SOURCE_DIR}/mymath.h  # List your headers here
+)
+set_target_properties(mymath PROPERTIES PUBLIC_HEADER "${MYMATH_PUBLIC_HEADERS}")
 
 # Specify installation rules
 install(TARGETS mymath
@@ -19,7 +21,7 @@ install(TARGETS mymath
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin
-    PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/mymath"
+    PUBLIC_HEADER DESTINATION include/mymath
 )
 
 install(EXPORT mymathTargets
